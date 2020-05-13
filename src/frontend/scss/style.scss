@@ -6,6 +6,7 @@ body {
 #app {
   @import "timeline";
   @import "admin";
+  @import "login-form";
 
   > div {
     max-width: 1200px;

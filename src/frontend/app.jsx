@@ -3,19 +3,11 @@ import ReactDOM from 'react-dom';
 import {Timeline} from "./components/timeline/timeline";
 import {Route, Switch} from 'react-router';
 import {BrowserRouter} from "react-router-dom";
-import {authenticationService} from "./services/auth-service";
-import {AdminRoute} from "./components/admin/admin-route";
 import {LoginPage} from "./components/admin/login-page";
 import {LogoutPage} from "./components/admin/logout-page";
+import {AdminPage} from "./components/admin/admin-page";
 
 const App = props => {
-
-    let [currentUser, setCurrentUser] = useState({});
-
-    useEffect(() => {
-        authenticationService.currentUser.subscribe(x => setCurrentUser(x));
-    }, [])
-
     return (
         <BrowserRouter>
             <Switch>
@@ -28,7 +20,7 @@ const App = props => {
                     </div>
                 </Route>
                 <Route exact path={'/logout'} component={LogoutPage}/>
-                <AdminRoute exact path="/admin"/>
+                <Route exact path="/admin" component={AdminPage}/>
                 <Route path="/login" component={LoginPage}/>
                 <Route render={() => <h1>Page not found</h1>}/>
             </Switch>

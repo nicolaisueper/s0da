@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {authenticationService} from "../../services/auth-service";
 import {Redirect} from "react-router";
+import {login} from "../../helpers";
 
 export const LoginForm = props => {
 
@@ -10,12 +10,6 @@ export const LoginForm = props => {
         error: false,
         shouldRedirect: false
     });
-
-    useEffect(() => {
-        if (authenticationService.currentUserValue) {
-            setShouldRedirect(true);
-        }
-    }, []);
 
     const handleChange = (e) => {
         const {id, value} = e.target
@@ -41,17 +35,14 @@ export const LoginForm = props => {
 
     function formSubmit(e) {
         e.preventDefault();
-        authenticationService.login(state.username, state.password)
-            .then(
-                user => {
-                    setError(false);
-                    const {from} = state || {from: {pathname: "/"}};
-                    setShouldRedirect(true);
-                },
-                error => {
-                    setError(true);
-                }
-            );
+        login(state.username, state.password).then(_ => {
+                setError(false);
+                setShouldRedirect(true);
+            }
+        ).catch(e => {
+            console.log(e);
+            setError(true);
+        });
     }
 
     return (state.shouldRedirect && <Redirect to={'/admin'}/> || <form id={'login-form'} onSubmit={formSubmit}>

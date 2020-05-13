@@ -1,53 +1,8 @@
-form#login-form {
-  min-width: 350px;
-  width: 350px;
-  max-width: 350px;
-
-  margin: 0 auto; //TODO maybe use flexbox here?
-
+div.loader {
   display: flex;
-  flex-direction: column;
-
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-
-  label {
-    margin-top: 1em;
-    margin-bottom: 0.1em;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
-  input {
-    background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 0.4em;
-    line-height: 1.4em;
-  }
-
-  button {
-    margin-top: 1em;
-    font-size: 1.2em;
-    font-weight: 100;
-    background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-
-    &:active {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  span.feedback {
-    width: 100%;
-    font-size: 0.8em;
-    text-align: center;
-    margin-top: 1em;
-
-    &.hidden {
-      display: none;
-    }
-  }
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }

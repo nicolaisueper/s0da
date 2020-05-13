@@ -1,29 +1,21 @@
-import {authenticationService} from "./services/auth-service";
-
-export function authHeader() {
-    // return authorization header with jwt token
-    const currentUser = authenticationService.currentUserValue;
-    if (currentUser && currentUser.token) {
-        return { Authorization: `Bearer ${currentUser.token}` };
-    } else {
-        return {};
-    }
-}
-
-export function handleResponse(response) {
-    return response.text().then(text => {
+export function login(username, password) {
+    return fetch('/api/users/authenticate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
+    }).then(res => res.text().then(text => {
         const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if ([401, 403].indexOf(response.status) !== -1) {
-                // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-                authenticationService.logout();
-                location.reload(true);
+        if (!res.ok) {
+            if ([401, 403].indexOf(res.status) !== -1) {
+                throw new Error('Unauthorized!');
             }
-
-            const error = (data && data.message) || response.statusText;
+            const error = (data && data.message) || res.statusText;
             return Promise.reject(error);
         }
-
         return data;
-    });
+    }));
+}
+
+export function logout() {
+    fetch('/api/users/logout').then(res => !res.ok && console.log('Error during logout!'));
 }

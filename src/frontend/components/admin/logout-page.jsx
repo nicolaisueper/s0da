@@ -1,8 +1,8 @@
 import React from 'react';
-import {authenticationService} from "../../services/auth-service";
 import {Redirect} from "react-router";
+import {logout} from "../../helpers";
 
 export const LogoutPage = props => {
-    authenticationService.logout();
+    logout();
     return (<Redirect to={'/'}/>)
 };

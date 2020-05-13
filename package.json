@@ -2,10 +2,11 @@
   "name": "s0da",
   "version": "1.0.0",
   "description": "Refreshing status page.",
-  "keyboard": [
+  "keywords": [
     "status-page",
     "monitoring"
   ],
+  "repository": "https://github.com/lfuelling/s0da.git",
   "license": "MIT",
   "scripts": {
     "start:backend": "node src/backend/index.js",

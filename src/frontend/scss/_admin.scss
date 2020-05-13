@@ -39,4 +39,15 @@ form#login-form {
       background-color: rgba(0, 0, 0, 0.2);
     }
   }
+
+  span.feedback {
+    width: 100%;
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 1em;
+
+    &.hidden {
+      display: none;
+    }
+  }
 }

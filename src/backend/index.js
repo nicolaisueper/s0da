@@ -3,6 +3,7 @@ const express = require('express');
 const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 
 const debugTokenSecret = 'youraccesstokensecret';
 
@@ -22,6 +23,12 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+app.use(cookieParser())
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send('Unauthorized!');
+    }
+});
 
 app.get('/api', (req, res) => res.send('Hello World!'));
 app.get('/api/incidents', (req, res) => res.send(dummyData));
@@ -38,7 +45,7 @@ app.post('/api/users/authenticate', (req, res) => {
     if (user) {
         // Generate an access token
         const accessToken = jwt.sign({username: user.username, role: user.role}, debugTokenSecret);
-        res.cookie('s0da-token', accessToken, {httpOnly: true, secure: process.env.NODE_ENV === 'production'})
+        res.cookie('s0da.token', accessToken, {httpOnly: true, secure: process.env.NODE_ENV === 'production'})
         res.json({
             username: user.username,
             role: user.role
@@ -51,10 +58,12 @@ app.post('/api/users/authenticate', (req, res) => {
 app.get('/api/admin',
     expressJWT({
         secret: 'shhhhhhared-secret',
-        getToken: (req) => req.cookies['s0da-token'] || null
+        getToken: (req) => {
+            return (req.cookies && req.cookies['s0da.token']) || null;
+        }
     }), (req, res) => {
-        if (!req.user.admin) return res.sendStatus(401);
-        res.sendStatus(200);
+        if (!req.user.role || req.user.role !== 'admin') return res.sendStatus(401);
+        res.json({username: req.user.role});
     });
 
 app.listen(port, () => console.log(`Backend started: http://localhost:${port}`));

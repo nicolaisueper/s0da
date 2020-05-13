@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {authenticationService} from "../../services/auth-service";
 import {Link} from "react-router-dom";
+import {handleResponse} from "../../helpers";
 
 export const AdminPage = props => {
 
@@ -10,7 +11,13 @@ export const AdminPage = props => {
         setCurrentUser(authenticationService.currentUserValue)
     }, [])
 
-    console.log(currentUser);
+    fetch('/api/admin', {credentials: 'include'})
+        .then(res => (res.ok && res.json()) || res).then(res => {
+        if (!res.username || res.username !== currentUser.username) {
+            authenticationService.logout();
+            location.reload(true);
+        }
+    });
 
     return (<div>
         <h1 className={'app-title'} aria-label={'Soda Admin'}>S🥤da - Admin</h1>

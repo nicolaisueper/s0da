@@ -1,0 +1,37 @@
+body {
+  background-color: #e1e1e1;
+  font-family: sans-serif;
+}
+
+#app {
+  @import "timeline";
+  @import "admin";
+
+  > div {
+    max-width: 1200px;
+    width: 95%;
+    min-width: 95%;
+  }
+
+  display: flex;
+  justify-content: center;
+
+  h1.app-title {
+    width: 100%;
+    text-align: center;
+    font-weight: 100;
+    font-size: 3.5em;
+  }
+
+  p.app-subtitle {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 100;
+  }
+
+  h2.timeline-title {
+    font-weight: 100;
+    font-size: 2em;
+  }
+}

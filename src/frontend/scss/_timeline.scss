@@ -1,0 +1,116 @@
+#status-timeline {
+  ul.timeline {
+    list-style-type: none;
+
+    li.timeline-entry {
+
+      h3 {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &:before {
+        background-image: url("../../../node_modules/eva-icons/outline/svg/calendar-outline.svg");
+        background-size: cover;
+        height: 1.2em;
+        width: 1.2em;
+        margin-right: 0.5em;
+        display: inline-block;
+        content: '\00a0'; // &nbsp;
+      }
+
+      p.timeline-entry-incidents-empty {
+        margin-left: 4em;
+      }
+
+      ul.timeline-entry-incidents {
+        list-style-type: none;
+
+        li.timeline-incident {
+          &.open {
+            &:before {
+              background-image: url("../../../node_modules/eva-icons/outline/svg/alert-circle-outline.svg");
+              background-size: cover;
+              height: 1em;
+              width: 1em;
+              margin-right: 0.5em;
+              display: inline-block;
+              content: '\00a0'; // &nbsp;
+              vertical-align: top;
+              margin-top: 1.3em;
+            }
+          }
+
+          &.solved {
+            &:before {
+              background-image: url("../../../node_modules/eva-icons/outline/svg/checkmark-circle-outline.svg");
+              background-size: cover;
+              height: 1em;
+              width: 1em;
+              margin-right: 0.5em;
+              display: inline-block;
+              content: '\00a0'; // &nbsp;
+              vertical-align: top;
+              margin-top: 1.3em;
+            }
+          }
+
+          &.watching {
+            &:before {
+              background-image: url("../../../node_modules/eva-icons/outline/svg/eye-outline.svg");
+              background-size: cover;
+              height: 1em;
+              width: 1em;
+              margin-right: 0.5em;
+              display: inline-block;
+              content: '\00a0'; // &nbsp;
+              vertical-align: top;
+              margin-top: 1.3em;
+            }
+          }
+
+          .timeline-incident__wrapper {
+            display: inline-block;
+            max-width: 95%;
+
+            p.incident-details {
+              white-space: pre-wrap;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: .8em;
+    margin-bottom: 2em;
+
+    button,
+    span {
+      font-family: sans-serif;
+      font-size: 0.8em;
+    }
+
+    button {
+      background-color: transparent;
+      text-decoration: underline;
+      border: none;
+
+      &.hidden {
+        visibility: hidden;
+      }
+
+      &:hover{
+        color: rgba(0,0,0,0.7);
+        cursor: pointer;
+      }
+    }
+  }
+}

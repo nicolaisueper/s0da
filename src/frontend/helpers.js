@@ -1,5 +1,4 @@
 import {authenticationService} from "./services/auth-service";
-import jwtDecode from 'jwt-decode';
 
 export function authHeader() {
     // return authorization header with jwt token
@@ -25,6 +24,6 @@ export function handleResponse(response) {
             return Promise.reject(error);
         }
 
-        return jwtDecode(data.accessToken);
+        return data;
     });
 }

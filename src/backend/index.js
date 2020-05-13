@@ -28,17 +28,20 @@ app.get('/api/incidents', (req, res) => res.send(dummyData));
 
 app.post('/api/users/authenticate', (req, res) => {
     // Read username and password from request body
-    const { username, password } = req.body;
+    const {username, password} = req.body;
 
     // Filter user from the users array by username and password
-    const user = debugUsers.find(u => { return u.username === username && u.password === password });
+    const user = debugUsers.find(u => {
+        return u.username === username && u.password === password
+    });
 
     if (user) {
         // Generate an access token
-        const accessToken = jwt.sign({ username: user.username,  role: user.role }, debugTokenSecret);
-
+        const accessToken = jwt.sign({username: user.username, role: user.role}, debugTokenSecret);
+        res.cookie('s0da-token', accessToken, {httpOnly: true, secure: process.env.NODE_ENV === 'production'})
         res.json({
-            accessToken
+            username: user.username,
+            role: user.role
         });
     } else {
         res.sendStatus(401)
@@ -46,8 +49,10 @@ app.post('/api/users/authenticate', (req, res) => {
 });
 
 app.get('/api/admin',
-    expressJWT({ secret: 'shhhhhhared-secret' }),
-    function(req, res) {
+    expressJWT({
+        secret: 'shhhhhhared-secret',
+        getToken: (req) => req.cookies['s0da-token'] || null
+    }), (req, res) => {
         if (!req.user.admin) return res.sendStatus(401);
         res.sendStatus(200);
     });

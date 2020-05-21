@@ -51,6 +51,6 @@ export const LoginForm = props => {
         <label htmlFor="password">Password</label>
         <input type="password" id="password" placeholder="Password" value={state.password} onChange={handleChange}/>
         <button type="submit">Login</button>
-        <span className={'feedback' + (!state.error ? ' hidden' : '')}>Error logging in!</span>
+        {state.error && <span className={'feedback'}>Error logging in!</span>}
     </form>)
 };

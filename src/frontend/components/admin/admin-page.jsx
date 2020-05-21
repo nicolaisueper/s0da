@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from "react-router";
 import {AdminDashboard} from "./admin-dashboard";
-import Loader from 'react-loader-spinner';
+import Loader from "react-loader-spinner";
 
 export const AdminPage = props => {
 

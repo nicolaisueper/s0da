@@ -12,12 +12,26 @@ div.nav {
   display: flex;
   flex-direction: row-reverse;
   align-content: end;
+}
 
-  a.btn {
-    display: inline-block;
-    padding: 0.3em;
-    border: 1px solid #000;
-    border-radius: 3.141%;
+a.btn,
+button.btn {
+  display: inline-block;
+  padding: 0.3em;
+  border: 1px solid #000;
+  border-radius: 3.141%;
+  color: #000;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:active,
+  &:hover {
+    color: #555;
+    text-decoration: none;
+  }
+
+  &:visited {
     color: #000;
     text-decoration: none;
 
@@ -26,17 +40,34 @@ div.nav {
       color: #555;
       text-decoration: none;
     }
+  }
+}
 
-    &:visited {
-      color: #000;
-      text-decoration: none;
+form#settings-form {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  max-width: 40em;
+  margin: 0 auto;
 
-      &:active,
-      &:hover {
-        color: #555;
-        text-decoration: none;
-      }
-    }
+  input, label {
+    display: inline-block;
+    margin: 0.3em;
   }
 
+  input {
+    background-color: transparent;
+    border: 1px solid black;
+    padding: 0.4em;
+    line-height: 1.2em;
+  }
+
+  button {
+    margin-top: 0.8em;
+  }
+
+  span.feedback {
+    text-align: center;
+    margin-top: 0.4em;
+  }
 }

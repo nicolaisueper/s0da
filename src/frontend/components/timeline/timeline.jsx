@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {addDays, format, subDays} from 'date-fns'
+import {addDays, format, subDays, parse} from 'date-fns'
 import {TimelineEntry} from "./timeline-entry";
 import {SettingsContext} from "../../SettingsContext";
 import Loader from "react-loader-spinner";
@@ -20,10 +20,11 @@ export const Timeline = props => {
     useEffect(() => {
         fetch('/api/incidents').then(res => res.json()).then(res => {
             setIncidents(res.incidents.reduce((orderedIncidents, current) => {
-                if (!orderedIncidents[current.date]) {
-                    orderedIncidents[current.date] = [];
+                let formattedDate = format(parse(current.date, 'dd.MM.yyyy HH:mm', new Date()), 'dd.MM.yyyy')
+                if (!orderedIncidents[formattedDate]) {
+                    orderedIncidents[formattedDate] = [];
                 }
-                orderedIncidents[current.date].push(current);
+                orderedIncidents[formattedDate].push(current);
                 return orderedIncidents;
             }, {}));
         });

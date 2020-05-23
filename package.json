@@ -11,7 +11,9 @@
   "scripts": {
     "start:backend": "node src/backend/index.js",
     "start:frontend-proxy": "node dev-proxy.js",
-    "start:dev": "run-p start:frontend-proxy start:backend"
+    "start:dev": "run-p start:frontend-proxy start:backend",
+    "db:init": "node src/backend/db/init.js",
+    "db:migrate": "node src/backend/db/migrate.js"
   },
   "babel": {
     "presets": [
@@ -60,6 +62,8 @@
     "express-jwt": "^5.3.3",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "ora": "^4.0.4",
+    "pg-promise": "^10.5.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.14",

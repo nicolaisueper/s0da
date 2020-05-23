@@ -76,6 +76,11 @@
             display: inline-block;
             max-width: 95%;
 
+            h4 > abbr {
+              text-decoration: none;
+              cursor: default;
+            }
+
             p.incident-details {
               white-space: pre-wrap;
             }

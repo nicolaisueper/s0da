@@ -7,6 +7,7 @@ import {LoginPage} from "./components/admin/login-page";
 import {LogoutPage} from "./components/admin/logout-page";
 import {AdminPage} from "./components/admin/admin-page";
 import {SettingsContext} from "./SettingsContext";
+import Loader from "react-loader-spinner";
 
 const App = props => {
     const [settings, setSettings] = useState(undefined);
@@ -18,14 +19,16 @@ const App = props => {
             .then(setSettings);
     }, [])
 
+    if (!settings?.timespan) return <Loader className={'loader'} type="Puff" color="#000" height={64} width={64}/>;
+
     return (
         <SettingsContext.Provider value={settings}>
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/">
                         <div>
-                            <h1 className={'app-title'} aria-label={'Soda'}>S🥤da</h1>
-                            <p className={'app-subtitle'}>A refreshing incident board...</p>
+                            <h1 className={'app-title'} aria-label={'Soda'}>{settings?.title}</h1>
+                            <p className={'app-subtitle'}>{settings?.subtitle}</p>
                             <h2 className={'timeline-title'}>Timeline</h2>
                             <Timeline/>
                         </div>

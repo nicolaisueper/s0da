@@ -1,37 +1,37 @@
 {
   "incidents": [
     {
-      "date": "13.05.2020",
+      "date": "23.05.2020 12:10",
       "status": "watching",
       "title": "Degraded DB performance",
       "description": "The database server seems a bit slow at the moment. We're monitoring a configuration change which might improve things..."
     },{
-      "date": "13.05.2020",
+      "date": "23.05.2020 13:37",
       "status": "solved",
       "title": "Degraded response time",
       "description": "A misconfiguration in the load balancers led to a redirect loop where each load balancer forwarded the request to another load balancer until one of the two without the new configuration (speaking of failsafes) was hit."
     },{
-      "date": "12.05.2020",
+      "date": "22.05.2020 0:11",
       "status": "open",
       "title": "Downtime",
       "description": "A downtime occurred to some servers due to an unexpected water damage to one of our power regulators.\n\nSome services are being served by failsafe locations which might respond more slowly."
     },{
-      "date": "11.05.2020",
+      "date": "21.05.2020 2:29",
       "status": "solved",
       "title": "Degraded DB performance",
       "description": "The database server seems a bit slow at the moment."
     }, {
-      "date": "10.05.2020",
+      "date": "20.05.2020 14:12",
       "status": "solved",
       "title": "Disruption of backend",
       "description": "The backend server lost power because someone fell onto the cable in a Nerf-war."
     }, {
-      "date": "04.05.2020",
+      "date": "14.05.2020 12:35",
       "status": "solved",
       "title": "Disruption of frontend",
       "description": "The frontend server lost power because someone fell onto the cable in a Nerf-war."
     }, {
-      "date": "01.01.1970",
+      "date": "01.01.1970 00:01",
       "status": "solved",
       "title": "Hello World",
       "description": "If you didn't really use the \"previous n days\" button to get here you're a cheater."

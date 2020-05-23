@@ -1,0 +1,7 @@
+{
+  "dbname": "postgres",
+  "dbuser": "postgres",
+  "dbpass": "changemepls",
+  "dbport": "5432",
+  "dbhost": "localhost"
+}

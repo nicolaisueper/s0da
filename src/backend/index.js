@@ -4,6 +4,11 @@ const expressJWT = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
+const pgpr = require('pg-promise')()
+const buildConnectionString = require("./db/utils.js").buildConnectionString;
+
+const config = require('./config.json')
+const db = pgpr(buildConnectionString(config.dbuser, config.dbpass, config.dbhost, config.dbport, config.dbname))
 
 const debugTokenSecret = 'youraccesstokensecret';
 
@@ -20,7 +25,10 @@ const debugUsers = [
 ];
 
 const dummySettings = {
-    timespan: 10
+    timespan: 10,
+    title: "S🥤da",
+    subtitle: "A refreshing incident board...",
+    showGraph: true,
 }
 
 const app = express();
@@ -73,5 +81,16 @@ app.get('/api/admin',
         if (!req.user.role || req.user.role !== 'admin') return res.sendStatus(401);
         res.json({username: req.user.username});
     });
+
+app.post('/api/settings', expressJWT({
+    secret: debugTokenSecret,
+    getToken: (req) => {
+        return (req.cookies && req.cookies[cookieName]) || null;
+    }
+}), (req, res) => {
+    if (!req.user.role || req.user.role !== 'admin') return res.sendStatus(401);
+
+    res.sendStatus(500);
+});
 
 app.listen(port, () => console.log(`Backend started: http://localhost:${port}`));

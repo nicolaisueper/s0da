@@ -40,7 +40,18 @@ export const AdminSettings = props => {
 
     function formSubmit(e) {
         e.preventDefault();
-        //TODO submit settings
+        fetch('/api/settings', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                timespan: state.timespan,
+                title: state.title,
+                subtitle: state.subtitle,
+                showGraph: state.showGraph
+            })
+        }).then(res => res.text().then(text => {
+            setError(!res.ok)
+        }));
     }
 
     if (!settings) return <Loader className={'loader'} type="Puff" color="#000" height={64} width={64}/>;
@@ -52,7 +63,7 @@ export const AdminSettings = props => {
         <input type="text" id="title" placeholder="S0da" value={state.title} onChange={handleChange}/>
         <label htmlFor="subtitle">Site Subtitle</label>
         <input type="text" id="subtitle" placeholder="a refreshing incident board" value={state.subtitle} onChange={handleChange}/>
-        <button type="submit">Save</button>
+        <button type="submit" className={'btn'}>Save</button>
         {state.error && <span className={'feedback'}>Error saving settings!</span>}
     </form>)
 };

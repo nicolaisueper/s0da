@@ -16,7 +16,7 @@ export const Timeline = () => {
         format(subDays(startDate, idx), 'dd.MM.yyyy')
       )
     );
-  }, [startDate, settings]);
+  }, [startDate, settings?.timespan]);
 
   useEffect(() => {
     fetch('/api/incidents')

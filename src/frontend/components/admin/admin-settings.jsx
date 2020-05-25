@@ -15,10 +15,10 @@ export const AdminSettings = () => {
 
   useEffect(() => {
     if (!settings) return;
-    setState({
-      ...state,
+    setState((prevState) => ({
+      ...prevState,
       ...settings,
-    });
+    }));
   }, [settings]);
 
   const handleChange = (e) => {

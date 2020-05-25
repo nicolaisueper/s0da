@@ -5,6 +5,9 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
+  "plugins": [
+    "react-hooks"
+  ],
   "env": {
     "browser": true,
     "es6": true
@@ -20,5 +23,9 @@
     "react": {
       "version": "detect"
     }
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
